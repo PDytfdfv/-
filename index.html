@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Canvas Studio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+
+    <div class="brand">
+      <span class="brand-mark">✦</span>
+      <div>
+        <strong>Canvas Studio</strong>
+        <small>Raster + Vector workspace</small>
+      </div>
+    </div>
+
+    <div class="file-actions">
+      <button id="newProject">New</button>
+      <button id="openProject">Open project</button>
+      <button id="saveProject" class="primary">Save project</button>
+      <button id="exportPng">Export PNG</button>
+      <button id="exportSvg">Export SVG</button>
+
+      <input
+        id="projectFile"
+        type="file"
+        accept=".json,application/json"
+        hidden
+      >
+    </div>
+
+  </header>
+
+
+  <main class="app">
+
+    <aside class="toolbar">
+
+      <div class="section-label">TOOLS</div>
+
+      <button class="tool active" data-tool="brush" title="Brush (B)">
+        ✎
+        <span>Brush</span>
+      </button>
+
+      <button class="tool" data-tool="eraser" title="Eraser (E)">
+        ◩
+        <span>Eraser</span>
+      </button>
+
+      <button class="tool" data-tool="line" title="Line">
+        ／
+        <span>Line</span>
+      </button>
+
+      <button class="tool" data-tool="rect" title="Rectangle">
+        □
+        <span>Rectangle</span>
+      </button>
+
+      <button class="tool" data-tool="ellipse" title="Ellipse">
+        ◯
+        <span>Ellipse</span>
+      </button>
+
+      <button class="tool" data-tool="select" title="Select / move">
+        ⌖
+        <span>Select</span>
+      </button>
+
+
+      <div class="section-label gap-top">FILES</div>
+
+      <button id="importSvg" class="tool" title="Import SVG">
+        ⇧
+        <span>Import SVG</span>
+      </button>
+
+      <button id="importImage" class="tool" title="Import image">
+        ▧
+        <span>Image</span>
+      </button>
+
+      <input
+        id="svgFile"
+        type="file"
+        accept=".svg,image/svg+xml"
+        hidden
+      >
+
+      <input
+        id="imageFile"
+        type="file"
+        accept="image/*"
+        hidden
+      >
+
+    </aside>
+
+
+    <section class="workspace">
+
+      <div class="options">
+
+        <label>
+          Color
+          <input id="color" type="color" value="#20212a">
+        </label>
+
+        <label>
+          Size
+          <input
+            id="size"
+            type="range"
+            min="1"
+            max="80"
+            value="6"
+          >
+          <output id="sizeOut">6 px</output>
+        </label>
+
+        <label>
+          Opacity
+          <input
+            id="opacity"
+            type="range"
+            min="5"
+            max="100"
+            value="100"
+          >
+          <output id="opacityOut">100%</output>
+        </label>
+
+        <button id="undo">↶ Undo</button>
+        <button id="redo">↷ Redo</button>
+
+        <span class="hint">
+          B brush · E eraser · Ctrl/Cmd+Z undo
+        </span>
+
+      </div>
+
+
+      <div class="canvas-wrap" id="canvasWrap">
+
+        <div class="paper" id="paper">
+
+          <canvas
+            id="canvas"
+            width="1200"
+            height="800"
+          ></canvas>
+
+          <div
+            id="vectorLayer"
+            aria-label="Imported SVG objects"
+          ></div>
+
+        </div>
+
+      </div>
+
+
+      <footer>
+
+        <span id="status">Ready</span>
+
+        <span>
+          1200 × 800 px
+        </span>
+
+        <span id="zoomLabel">
+          100%
+        </span>
+
+      </footer>
+
+    </section>
+
+
+    <aside class="right-panel">
+
+      <div class="panel-head">
+
+        <strong>Layers</strong>
+
+        <button
+          id="addLayer"
+          title="Add layer"
+        >
+          ＋
+        </button>
+
+      </div>
+
+
+      <div id="layers" class="layers"></div>
+
+
+      <div class="panel-head properties-head">
+        <strong>Properties</strong>
+      </div>
+
+
+      <div class="properties">
+
+        <label>
+          Layer name
+
+          <input
+            id="layerName"
+            value="Layer 1"
+          >
+        </label>
+
+
+        <label>
+          Layer opacity
+
+          <input
+            id="layerOpacity"
+            type="range"
+            min="0"
+            max="100"
+            value="100"
+          >
+        </label>
+
+
+        <div class="button-row">
+
+          <button id="toggleLayer">
+            Hide
+          </button>
+
+          <button
+            id="deleteLayer"
+            class="danger"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="note">
+
+        <strong>Starter build</strong>
+
+        <p>
+          Drawing, basic shapes, layers, project save/open,
+          PNG export, and SVG import/export are implemented.
+          Advanced vector editing tools can be added without
+          replacing the SVG import workflow.
+        </p>
+
+      </div>
+
+    </aside>
+
+  </main>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
